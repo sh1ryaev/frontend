@@ -39,13 +39,13 @@
    <transition name="fade" mode="out-in">
      <a v-if="active & item_id===item.id & type!='mypost' & item.photos.length>1"  href="/profile"
                        style="position: absolute;bottom: 3%;left:3%">
-              <img class=" m-1" v-bind:src="'http://shiryaev2001django.pythonanywhere.com'+item.user_photo" alt="..."
+              <img class=" m-1" v-bind:src="'https://shiryaev2001django.pythonanywhere.com'+item.user_photo" alt="..."
                    style="width: 40px;height: 40px; border-radius: 50%;">
             <span class="text-muted" style="font-size: 10px"><strong>{{item.username}}</strong></span>
             </a>
         <a v-else-if="active & item_id===item.id & type!='mypost' & item.photos.length==1" href="/profile"
                        style="position: absolute;bottom: 3%;left:3%">
-              <img class=" m-1" v-bind:src="'http://shiryaev2001django.pythonanywhere.com'+item.user_photo" alt="..."
+              <img class=" m-1" v-bind:src="'https://shiryaev2001django.pythonanywhere.com'+item.user_photo" alt="..."
                    style="width: 40px;height: 40px; border-radius: 50%;">
             <span class="text-light" style="font-size: 10px"><strong>{{item.username}}</strong></span>
             </a>
@@ -286,7 +286,7 @@ export default {
             var res = []
             for(var i=0;i<photos.length;i++)
             {
-              var item = "http://shiryaev2001django.pythonanywhere.com"+photos[i].cover
+              var item = "https://shiryaev2001django.pythonanywhere.com"+photos[i].cover
               //var pair = {id_post:photos[i].id_post, item:item}
               res.push(item)
             }
