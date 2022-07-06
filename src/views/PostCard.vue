@@ -451,7 +451,7 @@ export default {
             var res = []
             for(var i=0;i<photos.length;i++)
             {
-              var item = "http://shiryaev2001django.pythonanywhere.com"+photos[i].cover
+              var item = "https://shiryaev2001django.pythonanywhere.com"+photos[i].cover
               var pair = {id_post:photos[i].id_post, item:item}
               res.push(pair)
             }
@@ -485,7 +485,7 @@ export default {
                     var photos = response.data;
                     for (var i = 0; i < photos.length; i++) {
                       if (photos[i].id_post == id) {
-                        items[iter] = "http://127.0.0.1:8000" + photos[i].cover
+                        items[iter] = "https://127.0.0.1:8000" + photos[i].cover
                         iter += 1
                       }
                     }
