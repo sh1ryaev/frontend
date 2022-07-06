@@ -4,7 +4,7 @@
       <MDBCol tag="form"  class="col-md-4" >
         <div class="position-fixed">
           <div class="mb-3">
-          <img class="img-fluid shadow-2-strong" v-bind:src="'http://127.0.0.1:8000'+photo.photo" alt="..." style="border-radius: 50%; width: 200px; height: 200px">
+          <img class="img-fluid shadow-2-strong" v-bind:src="'https://shiryaev2001django.pythonanywhere.com'+photo.photo" alt="..." style="border-radius: 50%; width: 200px; height: 200px">
             <MDBBtn v-on:click="createUserPhoto" color="primary" floating>
               <font-awesome-icon icon="fa-solid fa-plus" />
               <input type="file" class="form-control" name="photo" id="file" ref="file" v-on:change="createUserPhoto"
