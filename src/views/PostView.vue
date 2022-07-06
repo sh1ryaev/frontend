@@ -29,7 +29,7 @@
           </MDBCardText>
                             <div class="d-flex justify-content-between mt-5" style="position:relative; padding-bottom: 50px;height:100%">
                <a class="hvr-forward">
-              <img class=" m-1" v-bind:src="'http://127.0.0.1:8000'+posts.user_photo" alt="..."
+              <img class=" m-1" v-bind:src="'https://shiryaev2001django.pythonanywhere.com'+posts.user_photo" alt="..."
                    style="width: 40px;height: 40px; border-radius: 50%;">
             <span class="text-muted" style="font-size: 10px"><strong>{{posts.username}}</strong></span>
             </a>
@@ -177,7 +177,7 @@ export default {
             var res = []
             for(var i=0;i<photos.length;i++)
             {
-              var item = "http://127.0.0.1:8000"+photos[i].cover
+              var item = "https://shiryaev2001django.pythonanywhere.com"+photos[i].cover
               //var pair = {id_post:photos[i].id_post, item:item}
               res.push(item)
             }

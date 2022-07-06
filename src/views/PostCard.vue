@@ -100,7 +100,7 @@
   </MasonryWall>
   <div v-cloak>
     <div  v-show="isBlank" style="padding: 250px">
-      <h1>Ничего не найдено!</h1>
+      <h1 v-show="notFound">Ничего не найдено!</h1>
     </div>
   </div>
   <!-- Button trigger modal -->
@@ -183,6 +183,7 @@ export default {
       data(){
       return{
         isBlank:true,
+        notFound:false,
         searchWord:'',
         title:'',
         description:'',
@@ -414,6 +415,9 @@ export default {
                 }
                 if(res.length>0){
                   this.isBlank=false
+                }
+                else{
+                  this.notFound=true
                 }
                 this.posts = res
 
