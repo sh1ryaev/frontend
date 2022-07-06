@@ -3,7 +3,9 @@ import {createStore} from 'vuex'
 export default createStore({
     state: {
         token:'',
-        isAuth: false
+        isAuth: false,
+        searchWord:'',
+        post:'',
     },
     mutations:{
         initStore(state){
@@ -23,6 +25,12 @@ export default createStore({
         removeToken(state){
             state.token=''
             state.isAuth=false
+        },
+        setSearchWord(state, word){
+          state.searchWord=word
+        },
+        setPost(state, post){
+          state.post=post
         }
     },
     actions:{

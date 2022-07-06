@@ -17,6 +17,21 @@ const routes = [
         component: () => import('../views/UserProfile.vue')
     },
     {
+        path:'/masonry',
+        name:'MasonryCard',
+        component: () => import('../views/MasonryCard.vue')
+    },
+     {
+        path:'/light',
+        name:'LightBox',
+        component: () => import('../views/LightBox.vue')
+    },
+         {
+        path:'/post',
+        name:'PostView',
+        component: () => import('../views/PostView.vue')
+    },
+    {
         path: '/',
         name: 'HomePage',
         component: () => import('../views/HomePage.vue')

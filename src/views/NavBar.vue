@@ -1,5 +1,5 @@
 <template>
-  <MDBNavbar expand="lg" position="top" light  style="background-color: #e3f2fd" container>
+  <MDBNavbar expand="lg" position="top" light  style="background-color: white" container>
     <!-- Toggle button -->
     <MDBNavbarToggler
       target="#navbarCenterAlignExample"
@@ -7,9 +7,9 @@
     ></MDBNavbarToggler>
     <!-- Collapsible wrapper -->
     <MDBCollapse id="navbarCenterAlignExample" v-model="collapse1">
-      <MDBNavbarNav center class="mb-4 mb-lg-0">
+      <MDBNavbarNav center>
         <!-- Center links -->
-        <MDBNavbarBrand href="/">
+        <MDBNavbarBrand  @click="localStorage.setItem('searchWord','')" href="/">
       <img
         src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.webp"
         height="30"
@@ -17,20 +17,39 @@
         loading="lazy"
       />
     </MDBNavbarBrand>
-                <MDBNavbarItem>
-            <router-link class="nav-link" to="/sign-up">Регистрация</router-link>
-        </MDBNavbarItem>
-        <MDBNavbarItem v-if="this.$store.state.isAuth">
-            <router-link class="nav-link" to="/profile">Профиль</router-link>
-        </MDBNavbarItem>
-        <MDBNavbarItem v-if="this.$store.state.isAuth" href="#" active>
-           <a class="nav-link" id="logout-button" @click.prevent="handleLogout">Выйти</a>
-        </MDBNavbarItem>
-        <MDBNavbarItem v-else href="#" active>
-          <router-link to="/log-in">Войти</router-link>
-        </MDBNavbarItem>
+        <form class="d-flex w-50">
+        <input
+          type="search"
+          class="form-control"
+          placeholder="Поиск..."
+          aria-label="Search"
+          v-model="searchWord"
+        />
+        <MDBBtn  @click="searchPosts" outline="primary">
+          <font-awesome-icon icon="fa-solid fa-magnifying-glass" size="lg"/>
+        </MDBBtn>
+      </form>
+        <a href="/sign-up" class="btn btn-primary" style="font-size: 13px"><strong>Регистрация</strong></a>
+        <MDBDropdown class="nav-item" v-model="dropdown6">
+        <MDBDropdownToggle tag="a" class="nav-link" @click="dropdown6 = !dropdown6"
+          ><img
+            src="https://mdbootstrap.com/img/Photos/Avatars/img (31).webp"
+            class="rounded-circle"
+            height="26"
+            alt=""
+            loading="lazy"
+          />
+        </MDBDropdownToggle>
+        <MDBDropdownMenu>
+          <MDBDropdownItem v-if="this.$store.state.isAuth" href="/profile">Профиль</MDBDropdownItem>
+          <MDBDropdownItem v-else href="/log-in">Войти</MDBDropdownItem>
+          <MDBDropdownItem v-if="this.$store.state.isAuth" href="" @click.prevent="handleLogout">Выход</MDBDropdownItem>
+        </MDBDropdownMenu>
+      </MDBDropdown>
+
         <!-- Center links -->
       </MDBNavbarNav>
+
     </MDBCollapse>
     <!-- Collapsible wrapper -->
   </MDBNavbar>
@@ -42,10 +61,13 @@ import {
     MDBNavbarToggler,
     MDBNavbarBrand,
     MDBNavbarNav,
-    MDBNavbarItem,
     MDBCollapse,
+    MDBBtn,
+    MDBDropdown,
+  MDBDropdownToggle,
+      MDBDropdownMenu,
+      MDBDropdownItem,
   } from 'mdb-vue-ui-kit';
-  import { ref } from 'vue';
   export default {
     name: "NavBar",
     components: {
@@ -53,16 +75,23 @@ import {
       MDBNavbarToggler,
       MDBNavbarBrand,
       MDBNavbarNav,
-      MDBNavbarItem,
       MDBCollapse,
+      MDBBtn,
+      MDBDropdown,
+      MDBDropdownToggle,
+      MDBDropdownMenu,
+      MDBDropdownItem,
     },
-    setup() {
-      const collapse1 = ref(false);
-      const dropdown1 = ref(false);
-      return {
-        collapse1,
-        dropdown1
+    data(){
+    return{
+      collapse1:false,
+      dropdown6:false,
+      dropdown1:false,
+      searchWord:'',
       }
+    },
+    mounted() {
+
     },
       methods: {
       handleLogout() {
@@ -70,16 +99,14 @@ import {
           this.$store.commit('removeToken')
         window.location.assign('/')
       },
+        searchPosts(){
+          localStorage.setItem('searchWord',this.searchWord.trim())
+          window.location.assign('/')
+        },
     },
   };
 </script>
 
 <style scoped>
-  a{
-    color: #2c3e50;
 
-  }
-a.router-link-active, li.router-link-active>a {
-  color: red;
-}
 </style>
