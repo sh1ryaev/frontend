@@ -27,6 +27,6 @@ import VueEasyLightbox from 'vue-easy-lightbox'
 library.add(faTwitter, faHeart, faPlus, faWindowMaximize,faColumns,faMagnifyingGlass)
 
 
-axios.defaults.baseURL="http://127.0.0.1:8000"
+axios.defaults.baseURL="http://shiryaev2001django.pythonanywhere.com"
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(store).use(router, axios,MasonryWall,VueEasyLightbox).mount('#app')
 

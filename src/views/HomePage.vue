@@ -75,50 +75,6 @@
     </MDBCol>
       <MDBCol col="1">
           <div class="position-fixed">
-               <!-- <MDBBtn @click="
-      () => {
-        modalContent = '@getbootstrap';
-        filterModal = true;
-      }" tag="a" color="dark" href="#!" floating>
-    <MDBIcon icon="filter"></MDBIcon>
-  </MDBBtn>-->
-       <!--     <MDBBtnGroup id="filter-target">
-              <MDBBtn
-                   title="Фильтр"
-        color=""
-        v-on:click="dropdown = !dropdown"
-        class="dropdown-toggle">
-                <MDBIcon icon="filter"></MDBIcon>
-              </MDBBtn>
-      <MDBDropdown  v-model="dropdown" target="#filter-target">
-        <MDBDropdownMenu aria-labelledby="dropdownMenuButton">
-          <div class="d-flex align-items-center justify-content-center">
-            <p class="m-1"><strong>Сортировать по:</strong></p>
-          </div>
-          <MDBDropdownItem @click="changeFilter(1)" href="#">Количество лайков(возр)</MDBDropdownItem>
-          <MDBDropdownItem @click="changeFilter(2)" href="#">Количество лайков(уб)</MDBDropdownItem>
-          <MDBDropdownItem @click="changeFilter(3)" href="#">Сначала новые</MDBDropdownItem>
-          <MDBDropdownItem @click="changeFilter(4)" href="#">Сначала старые</MDBDropdownItem>
-                    <div class="d-flex align-items-center justify-content-center">
-            <p class="m-1"><strong>Категории:</strong></p>
-          </div>
-          <div class="m-2 d-flex align-items-center justify-content-center" v-for="category in categories" :key="category.id">
-
-                <input class="form-check-input float-start" type="checkbox" v-bind:value="category.id" v-model="categories1" v-bind:id="category.id">
-                <label v-bind:for="category.id" class="fs-6 small form-check-label float-start"><small>{{ category.name }}</small></label><br>
-
-          <MDBCheckbox
-    tag="span"
-    :id="category.id"
-    :btnCheck="true"
-    labelClass="btn btn-info"
-    :label="category.name"
-    @click="changeCtg(category.id)"
-  />
-      </div>
-        </MDBDropdownMenu>
-      </MDBDropdown>
-    </MDBBtnGroup>-->
 
   </div>
       </MDBCol>
