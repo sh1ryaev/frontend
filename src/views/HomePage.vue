@@ -282,6 +282,8 @@
         category_id:this.ch_category
   })
       .then(response=>{
+                this.varyingExampleModal=false;
+          alert('Пост успешно создан!')
         console.log(response)
         console.log(ref(["file"]).value)
         for( var i = 0; i < this.files.length; i++ ){
@@ -294,8 +296,7 @@
         }})
       .then(response=>{
         console.log(response)
-        this.varyingExampleModal=false;
-          alert('Пост успешно создан!')
+
       })
       .catch(error =>{
         console.log(error)

@@ -4,7 +4,7 @@
     <span class="m-1" >Поиск по запросу <strong>{{searchWord}}</strong></span>
     <span><a class="btn btn-light btn-sm rounded-pill" @click="clearFilter" href=""><i class="fas fa-times"></i></a></span>
   </div>
- <MasonryWall v-cloak :items="posts" :ssr-columns="1" :column-width="columnWidth" :gap="30">
+ <MasonryWall v-cloak :items="posts" :ssr-columns="1" :column-width="columnWidth" :gap="20">
     <template #default="{ item }">
  <MDBCard @mouseover="active = true; item_id=item.id" @mouseleave="active = false; item_id=item.id" class=" p-1 mx-auto" >
           <div v-if="active & item_id===item.id" class="d-flex align-items-center" style="position: absolute; z-index: 4">
