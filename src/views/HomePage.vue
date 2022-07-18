@@ -294,7 +294,8 @@
         }})
       .then(response=>{
         console.log(response)
-
+        this.varyingExampleModal=false;
+          alert('Пост успешно создан!')
       })
       .catch(error =>{
         console.log(error)
