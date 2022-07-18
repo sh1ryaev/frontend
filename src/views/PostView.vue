@@ -1,6 +1,6 @@
 <template>
     <MDBRow class="pt-5">
-      <MDBCol col="2"></MDBCol>
+      <MDBCol col="1"></MDBCol>
       <MDBCol>
          <div class="text-center">
     <MDBCard class="mb-3 w-100">
@@ -9,7 +9,7 @@
         <MDBCardImg @click="showLightBox" class="mainImg" :src="mainPhoto" alt="..."/>
         <carousel class="m-4" :items-to-show="3" >
     <slide v-for="(slide,index) in photos" :key="index">
-      <MDBCardImg class="p-1" @click="mainPhoto=slide;mainPhotoIndex=index" :src="slide" alt="..."/>
+      <MDBCardImg class="p-1" @click="mainPhoto=slide;mainPhotoIndex=index" :src="slide" alt="..." style="height: 150px; max-width: 150px; object-fit: cover"/>
     </slide>
 
     <template #addons>
@@ -63,7 +63,7 @@
            <PostCard type="all" page="1" grid="recom" :chCategories="[posts.cat_id]" filter="3"></PostCard>
         </MDBRow>
       </MDBCol>
-      <MDBCol col="2"></MDBCol>
+      <MDBCol col="1"></MDBCol>
     </MDBRow>
   <vue-easy-lightbox
       escDisabled
@@ -178,7 +178,6 @@ export default {
             for(var i=0;i<photos.length;i++)
             {
               var item = "https://shiryaev2001django.pythonanywhere.com"+photos[i].cover
-              //var pair = {id_post:photos[i].id_post, item:item}
               res.push(item)
             }
             this.photos=res;

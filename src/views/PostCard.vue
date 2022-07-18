@@ -58,8 +58,6 @@
           <strong>{{item.category}}</strong>
         </a>
       </MDBCardTitle>
-
-       <!--<MDBCardText class="overflow-hidden" style="height: 5rem"><p>{{item.description}}</p></MDBCardText>-->
                     <div v-if="type==='mypost'" style="position: absolute; right: 0%;top:0%">
                 <MDBBtn  @click="editPost(item)" color="primary" floating title="Редактировать пост" style=" right: 2%">
                 <MDBIcon icon="edit"></MDBIcon>
@@ -103,7 +101,7 @@
       <h1 v-show="notFound">Ничего не найдено!</h1>
     </div>
   </div>
-  <!-- Button trigger modal -->
+
                <vue-easy-lightbox
       escDisabled
       moveDisabled
@@ -241,9 +239,6 @@ export default {
   emits: ['update:ch_categories'],
   mounted () {
                 this.isLoading = true;
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 2000);
     if(this.$store.state.isAuth==false){
       localStorage.setItem('user_id',0)
     }
@@ -419,6 +414,7 @@ export default {
                 else{
                   this.notFound=true
                 }
+                this.isLoading = false;
                 this.posts = res
 
               });

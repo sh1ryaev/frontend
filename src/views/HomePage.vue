@@ -81,56 +81,63 @@
   </MDBRow>
 
 <!--Модальное окно-->
-  <MDBModal
-    id="varyingExampleModal"
-    tabindex="-1"
-    labelledby="varyingExampleModalLabel"
-    v-model="varyingExampleModal"
-  >
-    <MDBModalHeader>
-      <MDBModalTitle id="varyingExampleModalLabel"> Новый пост </MDBModalTitle>
-    </MDBModalHeader>
-    <MDBModalBody>
-      <form>
-        <div class="mb-3">
-          <label for="title" class="col-form-label">Заголовок: </label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            v-model="title"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="message-text" class="col-form-label">Описание:</label>
-          <textarea class="form-control" id="message-text" v-model="description"></textarea>
-        </div>
-        <div class="mb-3">
-          <p class="col-form-label">Категория:</p>
-          <div v-for="category in categories" :key="category.id">
-              <input  v-model="ch_category" v-bind:value="category.id" class="form-check-input float-start m-1" type="radio" v-bind:id="'radio'+category.id">
-              <label class="form-check-label float-start m-1" v-bind:for="'radio'+category.id">{{category.name}}</label>
-          </div>
-        </div>
-        <div class="mb-3">
-          <MDBFile
-          v-model="files"
-          multiple
-          label="Выберите изображения:"
-          v-on:change="handleFileUploads"
-          />
-        </div>
-      </form>
-      <div class="large-12 medium-12 small-12 cell">
-  <div v-for="(file, key) in files" :key="key" class="file-listing">{{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">{{key}}Remove</span></div>
-</div>
-<br>
-    </MDBModalBody>
-    <MDBModalFooter>
+        <MDBModal
+            id="varyingExampleModal"
+            tabindex="-1"
+            labelledby="varyingExampleModalLabel"
+            v-model="varyingExampleModal">
+            <MDBModalHeader>
+                <MDBModalTitle id="varyingExampleModalLabel"> Новый пост </MDBModalTitle>
+            </MDBModalHeader>
+            <MDBModalBody>
+                <form>
+                    <div class="mb-3">
+                        <label for="title" class="col-form-label">Заголовок: </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            v-model="title"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Описание:</label>
+                        <textarea class="form-control" id="message-text" v-model="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <p class="col-form-label">Категория:</p>
+                        <div v-for="category in categories" :key="category.id">
+                            <input  v-model="ch_category" v-bind:value="category.id" class="form-check-input float-start m-1" type="radio" v-bind:id="'radio'+category.id">
+                            <label class="form-check-label float-start m-1" v-bind:for="'radio'+category.id">{{category.name}}</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <MDBFile
+                            v-model="files"
+                            multiple
+                            label="Выберите изображения:"
+                            v-on:change="handleFileUploads"
+                        />
+                    </div>
+                </form>
+                <div class="large-12 medium-12 small-12 cell">
+                        <MDBRow >
+                            <MDBCol v-for="(file, key) in urls" :key="key">
+                                <div style="max-width: 120px; position: relative">
+                                    <p :title="file.name" class="overflow-hidden">{{ file.name }}</p>
+                                    <img :src="file.url" alt="..." style="max-width: 120px">
+                                    <a class="btn btn-info btn-sm" v-on:click="removeFile(key)">Удалить</a>
+                                </div>
+                            </MDBCol>
+                        </MDBRow>
+                    </div>
+                <br>
+            </MDBModalBody>
+            <MDBModalFooter>
 
-      <MDBBtn v-on:click="savePost" color="primary"> Сохранить пост </MDBBtn>
-    </MDBModalFooter>
-  </MDBModal>
+                <MDBBtn v-on:click="savePost" color="primary"> Сохранить пост </MDBBtn>
+            </MDBModalFooter>
+        </MDBModal>
 </template>
 
 <script>
@@ -160,6 +167,7 @@
         filterName:'',
         dropdown:false,
         pageNum:1,
+        urls:[],
       }
     },
     components: {
@@ -195,8 +203,11 @@
 
     },
         prevPage(){
-                this.pageNum-=1
-                this.componentKey += 1;
+          if(this.pageNum!=1)
+              {
+                  this.pageNum-=1
+                  this.componentKey += 1;
+              }
         },
         nextPage(){
                 this.pageNum+=1
@@ -234,18 +245,31 @@
               getCategories(){
             axios.get('/get-categories/').then(response => this.categories = response.data);
         },
-        handleFileUploads(){
+       handleFileUploads(e){
           this.files = this.$refs.files;
+            console.log('---------files-------------')
+            //const file = e.target.files[0];
+            var res = []
+            for(var i=0;i<e.target.files.length;i++)
+            {
+                res.push({url:URL.createObjectURL(e.target.files[i]),
+                    name:e.target.files[i].name
+                })
+            }
+            this.urls=res
         },
-        removeFile( key ){
-          var a = []
-          for( var i = 0; i < this.files.length; i++ ){
-          let file = this.files[i];
-          a[i]=file
-          console.log(file)
-        }
-          a.splice( key, 1 );
-          this.files=a
+        removeFile(key){
+            var a = []
+            var b = []
+            for(var i = 0; i < this.files.length; i++){
+                let file = this.files[i];
+                a[i]=file
+                b[i]=this.urls[i]
+            }
+            a.splice( key, 1 );
+            b.splice( key, 1 );
+            this.files=a
+            this.urls=b
         },
         savePost(){
           var now = new Date();
